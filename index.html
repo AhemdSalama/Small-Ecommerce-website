@@ -19,13 +19,11 @@
             </select>
             <input type="number" placeholder="Min Price" id="minPriceInput">
             <input type="number" placeholder="Max Price" id="maxPriceInput">
-            <button class="btn-apply" id="applyFilterBtn">Apply Filters</button>
+            <button class="btn-apply" id="applyFilterBtn" onclick="applyFilter()">Apply Filters</button>
         </div>
 
         <div class="sort-container">
-            <select>
-                <option onclick="sortByPrice()">Sort By Price</option>
-            </select>
+            <button onclick="sortByPrice()">Sort By Price</button>
         </div>
     </header>
 

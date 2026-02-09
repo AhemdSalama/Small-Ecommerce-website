@@ -69,7 +69,7 @@ input, select {
     grid-template-columns: repeat(3, 1fr); 
     gap: 20px;
     padding: 20px;
-    width: 60%;
+    width: 70%;
     margin: 0 auto;
     box-sizing: border-box; /* Ensures padding doesn't break the width */
 }
@@ -108,7 +108,8 @@ input, select {
     gap: 10px;
 }
 
-.card-buttons button {
+.card-buttons button,
+.sort-container button {
     background-color: var(--btn-blue);
     color: white;
     border: none;

@@ -5,7 +5,9 @@ const loadPrevious = document.getElementById('loadPrevious');
 const loadNext = document.getElementById('loadNext');
 const activePaginatedBtn = document.getElementById('activePaginatedBtn');
 const cartItems = []; // global cart items
-
+const categoriesFilter = document.getElementById('categoriesFilter');
+let allProducts = [];
+let filteredProducts =[];
 let totalProducts;
 let page = 1;
 const productsPerPage = 6;
@@ -15,15 +17,34 @@ const loadProducts = async ()=>{
     const start = (page -1) * productsPerPage;
     const end = start + productsPerPage;
     activePaginatedBtn.innerHTML = page
-    // const paginateURL = `https://fakestoreapi.com/products?limit=${productsPerPage}&skip=${skip}`;
-    const allProductsURL= "https://fakestoreapi.com/products";
+    
+    // Fetch data from the API if the Allproduct is empty + setting the categories
+    if(allProducts.length === 0)
+    {
+        const res = await fetch("https://fakestoreapi.com/products");
+        allProducts = await res.json();
+        filteredProducts = [...allProducts];
+        totalProducts = filteredProducts.length;
 
-    const products = await fetch(allProductsURL).then((res)=>res.json());
-
-    totalProducts = products.length;
-    console.log(totalProducts)
-    const PaginatedItems = products.slice(start,end);
-
+        // Collect catigories from the data
+        const catigoriesList = filteredProducts.reduce((acc, value)=>{   
+            if(!acc.includes(value.category))
+                acc.push(value.category);
+            return acc;
+        },[]);
+        
+        // Update Catigories drop menu
+        categoriesFilter.innerHTML =`<option>All Categories</option>`;
+        catigoriesList.forEach(item => {
+            categoriesFilter.innerHTML += `
+            <option>${item}</option>
+        `;
+        });
+    }
+    
+    
+    // Pagination and display data
+    const PaginatedItems = filteredProducts.slice(start,end);
     const htmlString = PaginatedItems.map(
         (product) =>
              `
@@ -43,6 +64,7 @@ const loadProducts = async ()=>{
             `
         
     ).join('');
+
     if(listCardGrid)
     {
         listCardGrid.innerHTML = htmlString;
@@ -87,8 +109,6 @@ loadNext.addEventListener('click',()=>{
         loadProducts();
     }
 })
-loadProducts();
-
 //  viewDetails
 async function viewDetails(productId)
 {   
@@ -150,14 +170,61 @@ async function addToCart(productId){
 // Remove Item from cart 
 function removeItemFromCart(itemId)
 {
-    const item = cartItems.find(item=> item.item.id === itemId);
-    if (item.quantity == 1)
+    const index = cartItems.findIndex(i=>i.item.id === itemId)
+    
+    if(index !== -1)
     {
-        cartItems.pop(item);
+        if(cartItems[index].quantity >1)
+        {
+            cartItems[index].quantity-=1;
+        }
+        else{
+            cartItems.splice(index, 1);
+        }
     }
-    else {
-        item.quantity-=1;
-    }
+    
     loadCartItems();
-    console.log(item);
 }
+
+// Sort by Price
+let ascendingBool = false;
+function sortByPrice()
+{
+    if(!ascendingBool)
+    {
+        filteredProducts.sort((a,b)=>a.price-b.price);
+        ascendingBool =true
+    }
+    else{
+        filteredProducts.reverse();
+        ascendingBool = false;
+    }
+    loadProducts();
+}
+
+// Filter 
+function applyFilter()
+{
+    const searchInputField = document.getElementById('searchInputField').value;
+    const minPriceInput = document.getElementById('minPriceInput').value;
+    const maxPriceInput = document.getElementById('maxPriceInput').value;
+    const selectedCategory = categoriesFilter.value;
+
+    filteredProducts= allProducts.filter(item=>{
+        const matchesSearch = item.title.toLowerCase().includes(searchInputField.toLowerCase());
+        const matchesMinSearch = (minPriceInput == 0 || minPriceInput == '' )?true:item.price >= minPriceInput;
+        const matchesMaxSearch = (maxPriceInput == 0 || maxPriceInput == '' )?true:item.price <= maxPriceInput;
+        const matchesCategory = (selectedCategory === "All Categories") || (item.category === selectedCategory);
+
+        return matchesCategory && matchesMaxSearch && matchesMinSearch && matchesSearch;
+    });
+    console.log(filteredProducts);
+    totalProducts = filteredProducts.length;
+    page =1;
+    loadProducts();
+}
+// Program start
+loadProducts();
+setTimeout(()=>{
+    console.log(allProducts)
+},1000)
