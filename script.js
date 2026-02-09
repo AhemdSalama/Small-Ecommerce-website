@@ -205,11 +205,13 @@ function sortByPrice()
 // Filter 
 function applyFilter()
 {
+    // Get the values of the fields
     const searchInputField = document.getElementById('searchInputField').value;
     const minPriceInput = document.getElementById('minPriceInput').value;
     const maxPriceInput = document.getElementById('maxPriceInput').value;
     const selectedCategory = categoriesFilter.value;
 
+    // return the item if  all the matches return true
     filteredProducts= allProducts.filter(item=>{
         const matchesSearch = item.title.toLowerCase().includes(searchInputField.toLowerCase());
         const matchesMinSearch = (minPriceInput == 0 || minPriceInput == '' )?true:item.price >= minPriceInput;
@@ -218,7 +220,7 @@ function applyFilter()
 
         return matchesCategory && matchesMaxSearch && matchesMinSearch && matchesSearch;
     });
-    console.log(filteredProducts);
+    // Update the total for the pagination
     totalProducts = filteredProducts.length;
     page =1;
     loadProducts();
