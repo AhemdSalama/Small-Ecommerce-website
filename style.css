@@ -69,7 +69,8 @@ input, select {
     grid-template-columns: repeat(3, 1fr); 
     gap: 20px;
     padding: 20px;
-    width: 100%;
+    width: 60%;
+    margin: 0 auto;
     box-sizing: border-box; /* Ensures padding doesn't break the width */
 }
 
@@ -136,4 +137,70 @@ input, select {
 
 .pagination button.active {
     background: #0056b3;
+}
+
+/* Product Modal */
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Black w/ opacity */
+    backdrop-filter: blur(5px);
+}
+
+/* Modal Content Box */
+.modal-content {
+    background-color: #fff;
+    color: #333;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 12px;
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Close Button */
+.close-modal {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Detailed Product Layout inside Modal */
+.modal-detail-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: left;
+}
+
+.modal-detail-container img {
+    max-height: 300px;
+    object-fit: contain;
+}
+
+.category-badge {
+    background: #eee;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+.active{
+    display: block;
 }

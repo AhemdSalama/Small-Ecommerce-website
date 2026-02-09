@@ -49,13 +49,19 @@
     <!-- Pagination -->
     <footer class="pagination">
         <button id="loadPrevious">Previous</button>
-        <button class="active">1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>4</button>
+        <button class="active" id="activePaginatedBtn">1</button>
         <button id="loadNext">Next</button>
     </footer>
 
+    <!-- Product Model -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div id="modalBody">
+            
+            </div>
+        </div>
+    </div>
     <!-- JavaScript -->
      <script src="script.js"></script>
 </body>
