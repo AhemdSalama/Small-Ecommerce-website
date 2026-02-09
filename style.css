@@ -1,0 +1,139 @@
+:root {
+    --bg-color: #1a1a1a;
+    --card-bg: #f5f5f5;
+    --text-main: #ffffff;
+    --text-dark: #333333;
+    --btn-blue: #007bff;
+    --btn-green: #28a745;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Header & Filters */
+header h1 { margin-bottom: 20px; }
+
+.filter-bar {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+input, select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.btn-apply {
+    background-color: var(--btn-green);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.sort-container { margin: 15px 0; }
+
+/* Shopping Cart */
+.cart-section {
+    text-align: left;
+    max-width: 800px;
+    margin: 20px auto;
+    font-size: 0.9rem;
+}
+
+.cart-section ul { list-style: disc; padding-left: 20px; }
+.remove-btn {
+    background: #444;
+    color: white;
+    border: none;
+    padding: 2px 5px;
+    font-size: 0.7rem;
+    cursor: pointer;
+}
+
+/* Product Grid */
+.product-grid {
+    display: grid;
+    /* Fixed the syntax: removed the extra ')' */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box; /* Ensures padding doesn't break the width */
+}
+
+.product-card {
+    background: var(--card-bg);
+    color: var(--text-dark);
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: 250px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+.product-info h4 {
+    font-size: 1rem;
+    margin: 10px 0;
+    min-height: 40px;
+}
+
+.price {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.card-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.card-buttons button {
+    background-color: var(--btn-blue);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+/* Pagination */
+.pagination {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.pagination button {
+    padding: 8px 12px;
+    background: var(--btn-blue);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.pagination button.active {
+    background: #0056b3;
+}

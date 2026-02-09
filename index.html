@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header and Search Section -->
+    <header>
+        <h1>My Store</h1>
+        
+        <div class="filter-bar">
+            <input type="text" placeholder="Search for products..." id="searchInputField">
+            <select id="categoriesFilter">
+                <option>All Categories</option>
+            </select>
+            <input type="number" placeholder="Min Price" id="minPriceInput">
+            <input type="number" placeholder="Max Price" id="maxPriceInput">
+            <button class="btn-apply" id="applyFilterBtn">Apply Filters</button>
+        </div>
+
+        <div class="sort-container">
+            <select>
+                <option onclick="sortByPrice()">Sort By Price</option>
+            </select>
+        </div>
+    </header>
+
+    <!-- Shopping Cart Section -->
+    <section class="cart-section">
+        <h3>Shopping Cart</h3>
+        <ul id="cart-items">
+            <li>Mens Casual Premium Slim Fit T-Shirts - $22.3 1 <button class="remove-btn">Remove</button></li>
+            <li>Fjallraven - Foldsack No. 1 Backpack - $109.95 1 <button class="remove-btn">Remove</button></li>
+            <li>Mens Cotton Jacket - $55.99 2 <button class="remove-btn">Remove</button></li>
+        </ul>
+        <p>Total Quantity: <span id="total-qty">4</span></p>
+        <p>Total Price: <span id="total-price">$244.23</span></p>
+    </section>
+
+    <!-- Display Products -->
+    <main class="product-grid" id="listCardGrid">
+        
+    </main>
+
+    <!-- Pagination -->
+    <footer class="pagination">
+        <button id="loadPrevious">Previous</button>
+        <button class="active">1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>4</button>
+        <button id="loadNext">Next</button>
+    </footer>
+
+    <!-- JavaScript -->
+     <script src="script.js"></script>
+</body>
+</html>
