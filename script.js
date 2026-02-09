@@ -47,6 +47,27 @@ const loadProducts = async ()=>{
     {
         listCardGrid.innerHTML = htmlString;
     }
+    loadCartItems();
+}
+
+const loadCartItems = ()=>{
+    const cartItemsUl = document.getElementById('cart-items');
+    // const totalQuantity = document.getElementById('total-qty');
+    // const totalPrice = document.getElementById('total-price');
+    let totalQuantity = 0;
+    let totalPrice = 0;
+    cartItemsUl.innerHTML="";
+    cartItems.forEach(item =>{
+
+        totalQuantity += item.quantity;
+        totalPrice += (item.quantity * item.item.price);
+        cartItemsUl.innerHTML += `
+            <li>${item.item.title} - $${item.item.price * item.quantity} ${item.quantity} <button class="remove-btn" onclick="removeItemFromCart(${item.item.id})">Remove</button></li>
+        `;
+    });
+    document.getElementById('total-qty').innerHTML = totalQuantity;
+    document.getElementById('total-price').innerHTML = `$${totalPrice.toFixed(2)}`
+    
 }
 
 loadPrevious.addEventListener('click',()=>{
@@ -122,6 +143,21 @@ async function addToCart(productId){
         cartItems.push(prodObject);
     }
     console.log(cartItems);
-    // check if the product already in cart then increase the quantity, price etc..
+    
+    loadCartItems();
 
+}
+// Remove Item from cart 
+function removeItemFromCart(itemId)
+{
+    const item = cartItems.find(item=> item.item.id === itemId);
+    if (item.quantity == 1)
+    {
+        cartItems.pop(item);
+    }
+    else {
+        item.quantity-=1;
+    }
+    loadCartItems();
+    console.log(item);
 }
