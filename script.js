@@ -55,6 +55,8 @@ const loadProducts = async ()=>{
                 <div class="product-info">
                     <h4>${product.title}</h4>
                     <p class="price">$${product.price}</p>
+                    <p><strong>Rating:</strong> ${product.rating.rate} / 5</p>
+
                     <div class="card-buttons">
                         <button class="btn-details" onclick="viewDetails(${product.id})">View Details</button>
                         <button class="btn-add" onclick="addToCart(${product.id})">Add to Cart</button>
@@ -201,7 +203,18 @@ function sortByPrice()
     }
     loadProducts();
 }
-
+function sortByRating(){
+    if(!ascendingBool)
+    {
+        filteredProducts.sort((a,b)=>a.rating.rate-b.rating.rate);
+        ascendingBool =true
+    }
+    else{
+        filteredProducts.reverse();
+        ascendingBool = false;
+    }
+    loadProducts();
+}
 // Filter 
 function applyFilter()
 {

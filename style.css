@@ -109,7 +109,8 @@ input, select {
 }
 
 .card-buttons button,
-.sort-container button {
+.sort-container button,
+.modal-detail-container .btn-add {
     background-color: var(--btn-blue);
     color: white;
     border: none;
